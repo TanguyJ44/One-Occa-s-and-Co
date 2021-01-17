@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+  <class>fr.oneoccas.mapping.Objects</class>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://178.32.111.39:3306/one-occas?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">supitech</property>
+    <property name="hibernate.connection.password">TEY(Ren6%-7s4a3</property>
+    <mapping class="fr.oneoccas.mapping.Objects" package="fr.oneoccas.mapping"/>
+  </session-factory>
+</hibernate-configuration>
