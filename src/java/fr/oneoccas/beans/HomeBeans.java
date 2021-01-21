@@ -1,9 +1,14 @@
 package fr.oneoccas.beans;
 
 import fr.oneoccas.mapping.Objects;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.AttributeConverter;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;

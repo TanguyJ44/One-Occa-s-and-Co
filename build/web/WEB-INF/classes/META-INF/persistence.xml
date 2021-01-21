@@ -3,6 +3,8 @@
   <persistence-unit name="OneOccasPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>fr.oneoccas.mapping.Objects</class>
+    <class>fr.oneoccas.mapping.Users</class>
+    <class>fr.oneoccas.mapping.Types</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://178.32.111.39:3306/one-occas?zeroDateTimeBehavior=convertToNull"/>

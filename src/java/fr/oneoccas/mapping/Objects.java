@@ -63,6 +63,10 @@ public class Objects implements Serializable {
 
     public Objects() {
     }
+    
+    public Objects(Integer id) {
+        this.id = id;
+    }
 
     public Objects(int idClient, int type, String image, String titre, String description, double prix, Date date) {
         this.idClient = idClient;
@@ -72,10 +76,6 @@ public class Objects implements Serializable {
         this.description = description;
         this.prix = prix;
         this.date = date;
-    }
-
-    public Objects(Integer id) {
-        this.id = id;
     }
 
     public Objects(Integer id, int idClient, int type, String image, String titre, String description, double prix, Date date) {

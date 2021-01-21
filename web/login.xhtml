@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Login</title>
+    </h:head>
+    <h:body style="font-family: 'Comfortaa', cursive;">
+        <h1>Page de Connexion / Inscription</h1>
+        
+        <h:messages layout="table" style="color: red;" />
+        <p style="color: red;">#{login.error}</p>
+        
+        <div style="display: table-cell; width: 250px; height: 500px; border: medium solid white">
+            <h:form>
+                <p>Email</p>
+                <h:inputText id="email" value="#{login.email}" required="true" 
+                             requiredMessage="La saisie de l'email est obligatoire !"
+                             validatorMessage="Merci d'entrer un email valide !">
+                             <f:validateRegex pattern="^[\w.+-]+@[\w.+-]+\.[a-z]{2,}$" />
+                </h:inputText>
+
+
+                <p>Mot de passe</p>
+                <h:inputSecret id="password" value="#{login.password}" required="true"
+                             requiredMessage="La saisie du mot de passe est obligatoire !" />
+
+                <br></br>
+                <br></br>
+                <h:commandButton value="Connexion" action="#{login.onLogin()}" />
+                <h:messages globalOnly="true" />
+            </h:form>
+        </div>
+        
+        <div style="display: table-cell; width: 250px; height: 500px; border: medium solid white">
+            <h:form>
+                <p>Nom</p>
+                <h:inputText id="lastname" value="#{login.lastname}" required="true" 
+                             requiredMessage="La saisie du nom est obligatoire !" />
+                <p>Prénom</p>
+                <h:inputText id="firstname" value="#{login.firstname}" required="true" 
+                             requiredMessage="La saisie du prénom est obligatoire !" />
+                <p>Pseudo</p>
+                <h:inputText id="username" value="#{login.username}" required="true" 
+                             requiredMessage="La saisie du pseudo est obligatoire !" />
+                <p>Code Postal</p>
+                <h:inputText id="zipcode" value="#{login.zipcode}" required="true" 
+                             requiredMessage="La saisie du code postal est obligatoire !" />
+                <p>Email</p>
+                <h:inputText id="email" value="#{login.email}" required="true" 
+                             requiredMessage="La saisie de l'email est obligatoire !"
+                             validatorMessage="Merci d'entrer un email valide !">
+                             <f:validateRegex pattern="^[\w.+-]+@[\w.+-]+\.[a-z]{2,}$" />
+                </h:inputText>
+
+
+                <p>Mot de passe</p>
+                <h:inputSecret id="password" value="#{login.password}" required="true"
+                             requiredMessage="La saisie du mot de passe est obligatoire !" />
+                <p>Répéter mot de passe</p>
+                <h:inputSecret id="secondpassword" value="#{login.secondpassword}" required="true"
+                             requiredMessage="La saisie du mot de passe est obligatoire !" />
+
+                <br></br>
+                <br></br>
+                <h:commandButton value="Inscription" action="#{login.onRegister()}" />
+                <h:messages globalOnly="true" />
+            </h:form>
+        </div>
+        
+        
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Dashboard</title>
+    </h:head>
+    <h:body style="font-family: 'Comfortaa', cursive;">
+        <f:metadata>
+          <f:event type="preRenderView" listener="#{dashboard.onLoad}"/>
+        </f:metadata>
+        <h1>Bienvenue sur votre compte #{sessionScope['user-username']} !</h1>
+        
+        <h:form>
+            <h:commandButton value="Déconnexion" action="#{dashboard.onDisconnect()}" />
+            <h:messages globalOnly="true" />
+        </h:form>
+    </h:body>
+</html>
+
