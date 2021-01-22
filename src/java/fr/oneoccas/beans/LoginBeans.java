@@ -112,7 +112,7 @@ public class LoginBeans {
         List<Users> user = entityManager.createQuery( "FROM Users WHERE email = '" + getEmail() + "'", Users.class ).getResultList();
         
         if (user.size() > 0) {
-            if (user.get(0).getPassword().equalsIgnoreCase(getPassword())) {
+            if (user.get(0).getPassword().equalsIgnoreCase(""+getPassword().hashCode())) {
                 try {    
                     externalContext.getSessionMap().put("user-connected", "true");
                     externalContext.getSessionMap().put("user-email", getEmail());
@@ -142,7 +142,7 @@ public class LoginBeans {
                 
                 if (getPassword().equalsIgnoreCase(getSecondpassword())) {
                     trans.begin();
-                    Users newUser = new Users(getFirstname(), getLastname(), getEmail(), getZipcode(), getUsername(), getPassword());
+                    Users newUser = new Users(getFirstname(), getLastname(), getEmail(), getZipcode(), getUsername(), ""+getPassword().hashCode());
                     entityManager.persist(newUser);
                     trans.commit();
                     
