@@ -5,17 +5,37 @@
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <h:body>
-        <h:form>
-            <h2 style="font-family: 'Comfortaa', cursive;">Liste des objets : </h2>
-            <h:selectOneMenu value="#{home.objects}">
-                <f:selectItems value="#{home.objects}" var="o" itemValue="#{o}" itemLabel="#{o.titre}" />
-            </h:selectOneMenu>
-        </h:form>
+    <h:body style="font-family: 'Comfortaa', cursive;">
+        
+        <h1 style="text-align: center;">Bienvenue sur le site OneOccas</h1>
+        
+        <div style="margin: 0 auto;width: 695px;height: 150px;border: solid;border-radius: 5px;">
+            <h3 style="margin-left: 10px;text-align: center;">Recherche</h3>
+            
+            <h:form>
+                <h:selectOneMenu value="#{home.types}" style="margin-left: 10px;width: 210px;">
+                    <f:selectItems value="#{home.types}" var="data" itemValue="#{data}" itemLabel="#{data.name}" />
+                </h:selectOneMenu>
+                
+                <h:inputText id="search" value="#{home.search}" 
+                             a:placeholder="Titre ou Mot-clé" style="margin-left: 10px;width: 210px;" />
+                
+                <h:inputText id="price" value="" 
+                             a:placeholder="Prix" style="margin-left: 10px;width: 100px;" />
+                
+                <h:inputText id="zipcode" value="#{home.zipcode}" 
+                             a:placeholder="Code Postal" style="margin-left: 10px;width: 100px;" />
+                
+                <h:commandButton value="Rechercher" action="#" style="margin-left: 300px;margin-top: 20px;" />
+            </h:form>
+            
+        </div>
+        
     </h:body>
 </html>
 

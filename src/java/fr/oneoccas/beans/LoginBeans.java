@@ -22,7 +22,7 @@ public class LoginBeans {
     private String firstname;
     private String lastname;
     private String username;
-    private int zipcode;
+    private String zipcode;
     private String email;
     private String password;
     private String secondpassword;
@@ -68,11 +68,11 @@ public class LoginBeans {
         this.username = username;
     }
 
-    public int getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
@@ -108,15 +108,23 @@ public class LoginBeans {
         this.error = error;
     }
     
+    public void onLoad() {  
+        if (externalContext.getSessionMap().containsKey("user-id")) {
+            try {    
+                externalContext.redirect("dashboard.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(LoginBeans.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     public void onLogin() {
         List<Users> user = entityManager.createQuery( "FROM Users WHERE email = '" + getEmail() + "'", Users.class ).getResultList();
         
         if (user.size() > 0) {
             if (user.get(0).getPassword().equalsIgnoreCase(""+getPassword().hashCode())) {
                 try {    
-                    externalContext.getSessionMap().put("user-connected", "true");
-                    externalContext.getSessionMap().put("user-email", getEmail());
-                    externalContext.getSessionMap().put("user-username", user.get(0).getUsername());
+                    externalContext.getSessionMap().put("user-id", user.get(0).getId());
                     externalContext.redirect("dashboard.xhtml");
                 } catch (IOException ex) {
                     Logger.getLogger(LoginBeans.class.getName()).log(Level.SEVERE, null, ex);
@@ -146,14 +154,7 @@ public class LoginBeans {
                     entityManager.persist(newUser);
                     trans.commit();
                     
-                    try {    
-                        externalContext.getSessionMap().put("user-connected", "true");
-                        externalContext.getSessionMap().put("user-email", getEmail());
-                        externalContext.getSessionMap().put("user-username", getUsername());
-                        externalContext.redirect("dashboard.xhtml");
-                    } catch (IOException ex) {
-                        Logger.getLogger(LoginBeans.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    setError("Votre compte a bien été créé, vous pouvez désormais vous connecter !");
                 } else {
                     // password not match
                     setError("Les deux mots de passe renseignés ne sont pas identiques !");

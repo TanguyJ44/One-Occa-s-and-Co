@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title>Dashboard</title>
     </h:head>
@@ -10,12 +11,89 @@
         <f:metadata>
           <f:event type="preRenderView" listener="#{dashboard.onLoad}"/>
         </f:metadata>
-        <h1>Bienvenue sur votre compte #{sessionScope['user-username']} !</h1>
+        <h1>Bienvenue sur votre compte #{dashboard.user_username} !</h1>
         
         <h:form>
             <h:commandButton value="Déconnexion" action="#{dashboard.onDisconnect()}" />
             <h:messages globalOnly="true" />
         </h:form>
+        
+        <h:form>
+            <h3>Mes objets :</h3>
+            <h:selectOneMenu value="#{dashboard.selectedObjects}">
+                <f:selectItems value="#{dashboard.objects}" var="data" itemLabel="#{data.titre} - #{data.prix}€" />
+            </h:selectOneMenu>
+            
+            <br></br>
+            <br></br>
+            
+            <input type="button" id="deleteBtn" value="Supprimer l'objet"
+                              onclick="confirmDelete();"/>
+            
+            <div id="actionDelete" style="display: none;">
+                <h:commandButton value="Confirmer la suppression" action="#{dashboard.onDeleteObject()}" />
+                <input type="button" value="Annuler" onclick="cancelDelete();" />
+            </div>
+            
+            <h:messages globalOnly="true" />
+        </h:form>
+        
+        <h:form>
+            <h3>Mes infos :</h3>
+        
+            <p>Pseudo</p>
+            <h:inputText id="username" value="#{dashboard.user_username}" disabled="true" />
+
+            <p>Email</p>
+            <h:inputText id="email" value="#{dashboard.user_email}" required="true" 
+                    requiredMessage="La saisie de l'email est obligatoire !"
+                    validatorMessage="Merci d'entrer un email valide !">
+                    <f:validateRegex pattern="^[\w.+-]+@[\w.+-]+\.[a-z]{2,}$" />
+            </h:inputText>
+            
+            <p>Nom</p>
+            <h:inputText id="lastname" value="#{dashboard.user_lastname}" required="true" 
+                         requiredMessage="La saisie du nom est obligatoire !" />
+            <p>Prénom</p>
+            <h:inputText id="firstname" value="#{dashboard.user_firstname}" required="true" 
+                         requiredMessage="La saisie du prénom est obligatoire !" />
+
+            <p>Code Postal</p>
+            <h:inputText id="zipcode" value="#{dashboard.user_zipcode}" required="true" 
+                         requiredMessage="La saisie du code postal est obligatoire !" />
+            
+            <p>Ancien mot de passe (*)</p>
+            <h:inputSecret id="oldpassword" value="#{dashboard.user_oldpassword}" required="true"
+                         requiredMessage="La saisie du mot de passe est obligatoire !" />
+
+            <p>Nouveau mot de passe</p>
+            <h:inputSecret id="newpassword" value="#{dashboard.user_newpassword}" />
+            
+            <p>Répéter nouveau mot de passe</p>
+            <h:inputSecret id="secondnewpassword" value="#{dashboard.user_secondnewpassword}" />
+            
+            <br></br>
+            <br></br>
+            
+            <h:commandButton value="Mettre à jour" action="#{dashboard.onUpdateUserInfo()}" />
+            
+        </h:form>
+        
+        <script type="text/javascript">
+            function confirmDelete() {
+               let btn = document.getElementById("deleteBtn");
+               let div = document.getElementById("actionDelete");
+               btn.style.display = "none";
+               div.style.display = "block";
+            }
+            function cancelDelete() {
+               let btn = document.getElementById("deleteBtn");
+               let div = document.getElementById("actionDelete");
+               btn.style.display = "block";
+               div.style.display = "none";
+            }
+        </script>
+        
     </h:body>
 </html>
 

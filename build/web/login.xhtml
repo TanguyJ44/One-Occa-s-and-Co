@@ -7,6 +7,10 @@
         <title>Login</title>
     </h:head>
     <h:body style="font-family: 'Comfortaa', cursive;">
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{login.onLoad()}"/>
+        </f:metadata>
+        
         <h1>Page de Connexion / Inscription</h1>
         
         <h:messages layout="table" style="color: red;" />

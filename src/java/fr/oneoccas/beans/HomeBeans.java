@@ -1,6 +1,7 @@
 package fr.oneoccas.beans;
 
 import fr.oneoccas.mapping.Objects;
+import fr.oneoccas.mapping.Types;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,9 @@ import javax.persistence.Persistence;
 @ManagedBean(name="home")
 @RequestScoped
 public class HomeBeans {
+    
+    private String search;
+    private String zipcode;
     
     EntityManagerFactory entityManagerFactory = null;
     EntityManager entityManager = null;
@@ -37,4 +41,24 @@ public class HomeBeans {
         return entityManager.createQuery("from Objects", Objects.class).getResultList();
     }
 
+    public List<Types> getTypes() {
+        return entityManager.createQuery("from Types", Types.class).getResultList();
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+    
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+    
 }

@@ -44,7 +44,7 @@ public class Users implements Serializable {
     private String email;
     @Basic(optional = false)
     @Column(name = "zipcode")
-    private int zipcode;
+    private String zipcode;
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
@@ -59,7 +59,7 @@ public class Users implements Serializable {
         this.id = id;
     }
     
-    public Users(String firstname, String lastname, String email, int zipcode, String username, String password) {
+    public Users(String firstname, String lastname, String email, String zipcode, String username, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -68,7 +68,7 @@ public class Users implements Serializable {
         this.password = password;
     }
 
-    public Users(Integer id, String firstname, String lastname, String email, int zipcode, String username, String password) {
+    public Users(Integer id, String firstname, String lastname, String email, String zipcode, String username, String password) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -110,11 +110,11 @@ public class Users implements Serializable {
         this.email = email;
     }
 
-    public int getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
