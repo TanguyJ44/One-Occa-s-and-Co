@@ -28,6 +28,9 @@ public class DashboardBeans {
     EntityManager entityManager = null;
     EntityTransaction entityTransaction = null;
     
+    private String error_message;
+    private Color error_color;
+    
     private String selectedObject;
     private int userID;
     
@@ -39,6 +42,12 @@ public class DashboardBeans {
     private String user_oldpassword;
     private String user_newpassword;
     private String user_secondnewpassword;
+    
+    enum Color {
+        RED,
+        ORANGE,
+        GREEN
+    }
 
     public DashboardBeans()
     {
@@ -92,8 +101,6 @@ public class DashboardBeans {
             selectedID = Integer.parseInt(matcher.group());
         }
         
-        System.out.println("" + selectedID);
-        
         Objects deleteObject = null;
         for (Objects object : getObjects()) {
             if (object.getId() == selectedID)
@@ -104,7 +111,8 @@ public class DashboardBeans {
         entityManager.remove(deleteObject);
         entityTransaction.commit();
         
-        // confirm delete
+        error_color = Color.GREEN;
+        error_message = "L'objet a bien été supprimé !";
     }
     
     public void onUpdateUserInfo()
@@ -123,12 +131,16 @@ public class DashboardBeans {
                 entityTransaction.begin();
                 entityManager.persist(updateUser);
                 entityTransaction.commit();
-                // confirmer que tout est ok
+                
+                error_color = Color.GREEN;
+                error_message = "Les modifications ont bien été prise en compte !";
             } else {
-                // l'ancien mdp ne correspond pas
+                error_color = Color.RED;
+                error_message = "Le mot de passe actuel est incorrect !";
             }
         } else {
-            // les 2 nouveaux mdp ne corresponde pas
+            error_color = Color.RED;
+            error_message = "Les deux nouveaux mot de passe ne correspondent pas !";
         }
         
     }
@@ -142,6 +154,22 @@ public class DashboardBeans {
     public List<Users> getUsers() {
         return entityManager.createQuery("from Users WHERE id = '" + 
                 externalContext.getSessionMap().get("user-id") + "'", Users.class).getResultList();
+    }
+
+    public String getError_message() {
+        return error_message;
+    }
+
+    public void setError_message(String error_message) {
+        this.error_message = error_message;
+    }
+
+    public Color getError_color() {
+        return error_color;
+    }
+
+    public void setError_color(Color error_color) {
+        this.error_color = error_color;
     }
 
     public String getSelectedObjects()
@@ -217,8 +245,5 @@ public class DashboardBeans {
     public void setUser_secondnewpassword(String user_secondnewpassword) {
         this.user_secondnewpassword = user_secondnewpassword;
     }
-
-    
-    
-    
+ 
 }

@@ -16,7 +16,8 @@
         <h3>Catégorie : #{object.typeName}</h3>
         <p>#{object.dataObject.description}</p>
         <h2>Prix : #{object.dataObject.prix}€</h2>
-        <p>Vendu par : #{object.userName}</p>
+        <p>Vendu par : #{object.userInfo.username}</p>
+        <p>En vente dans le : #{object.userInfo.zipcode}</p>
         <p>Mis en ligne le : #{object.dataObject.date}</p>
     </h:body>
 </html>

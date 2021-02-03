@@ -6,35 +6,121 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>OneOccas</title>
+        
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{home.onLoad}"/>
+        </f:metadata>
     </h:head>
     <h:body style="font-family: 'Comfortaa', cursive;">
         
         <h1 style="text-align: center;">Bienvenue sur le site OneOccas</h1>
         
+        <h:messages layout="table" style="text-align: center;color: red;" />
+        
         <div style="margin: 0 auto;width: 695px;height: 150px;border: solid;border-radius: 5px;">
             <h3 style="margin-left: 10px;text-align: center;">Recherche</h3>
             
             <h:form>
-                <h:selectOneMenu value="#{home.types}" style="margin-left: 10px;width: 210px;">
+                <h:selectOneMenu value="#{home.selectedObject}" style="margin-left: 10px;width: 210px;">
                     <f:selectItems value="#{home.types}" var="data" itemValue="#{data}" itemLabel="#{data.name}" />
                 </h:selectOneMenu>
                 
                 <h:inputText id="search" value="#{home.search}" 
                              a:placeholder="Titre ou Mot-clé" style="margin-left: 10px;width: 210px;" />
                 
-                <h:inputText id="price" value="" 
-                             a:placeholder="Prix" style="margin-left: 10px;width: 100px;" />
+                <h:inputText id="price" value="#{home.price}" 
+                             a:placeholder="Prix" style="margin-left: 10px;width: 100px;">
+                    <f:validateRegex pattern="^[0-9]*.?[0-9]+$" />
+                </h:inputText>
                 
                 <h:inputText id="zipcode" value="#{home.zipcode}" 
-                             a:placeholder="Code Postal" style="margin-left: 10px;width: 100px;" />
+                             a:placeholder="Code Postal" style="margin-left: 10px;width: 100px;">
+                    <f:validateRegex pattern="^[0-9]{5}$" />
+                </h:inputText>
                 
-                <h:commandButton value="Rechercher" action="#" style="margin-left: 300px;margin-top: 20px;" />
+                <h:commandButton value="Rechercher" action="#{home.onSearch}" style="margin-left: 300px;margin-top: 20px;" />
             </h:form>
-            
         </div>
+        
+        
+        <!-- ==============  STATS  ============== -->
+        
+        <c:if test="#{home.userIsConnected eq false}">
+            <br></br>
+        
+            <h3 style="width: 70%;margin-left: 15%;text-align: center;">
+                OneOccas est un service en ligne vous permettant de vendre et d'acheter des objets Oneplus de secondes mains 
+                ou reconditionné. Contrairement aux sites classiques de vente d'occasion entre particulier, OneOccas est spécialisé 
+                dans la vente de produit OnePlus exclusivement. Cela vous permet de côtoyer des passionnées de la marque pour être 
+                sûr de vendre et d'acheter au meilleur prix. Avec OneOccas, ne vous faite plus avoir sur la vente de vos produits OnePlus !
+            </h3>
+
+            <br></br>
+
+            <div style="width: 60%;margin-left: 20%;padding-bottom: 30px;border: dotted;border-radius: 5px;">
+                <div style="margin-left: 0.5%;width: calc(98%/3); height: 100px;display: inline-block;">
+                    <h1 style="text-align: center;color: red;">#{home.objects.size()}</h1>
+                    <h3 style="text-align: center">Annonces en ligne</h3>
+                </div>
+                <div style="width: calc(98%/3); height: 30px;display: inline-block;">
+                    <h1 style="text-align: center;color: red;">#{home.users.size()}</h1>
+                    <h3 style="text-align: center">Membres inscrits</h3>
+                </div>
+                <div style="width: calc(98%/3); height: 30px;display: inline-block;">
+                    <h1 style="text-align: center;color: red;">#{home.types.size()}</h1>
+                    <h3 style="text-align: center">Catégories d'objets</h3>
+                </div>
+            </div>
+        </c:if>
+        
+        <!-- ===================================== -->
+        
+        <br></br>
+        <p style="color: gray;text-align: center">----------------------------------</p>
+        <br></br>
+        
+        <!-- ==============  CARDS  ============== -->
+        
+        <ui:repeat value="#{home.searchObject}" var="obj">
+            <div id="card" onclick="redirectObject('#{obj.id}')" style="width: 50%;height: 150px;margin-left: 25%;
+                 margin-bottom: 20px;border: solid;border-radius: 5px;border-width: 2px;border-color: gray;cursor: pointer;">
+
+               <div style="width: 20%;height: 150px;display: inline-block;">
+                   <img src="#{obj.image}" width="150px" height="150px" style="margin-left: 20px;" />
+               </div>
+
+               <div style="width: 58%;height: 150px;display: inline-block;">
+                   <h2 style="position: absolute;margin-left: 40px;">#{obj.titre}</h2>
+                   <p style="position: absolute;margin-left: 40px;margin-top: 60px;width: 25%;">
+                       #{obj.description}
+                   </p>
+               </div>
+
+               <div style="position: absolute;width: 11%;height: 150px;display: inline-block;">
+                   <h2 style="margin-top: 50px;text-align: center;color: red;">#{obj.prix} €</h2>
+               </div>
+
+           </div>
+        </ui:repeat>
+        
+        <!-- ===================================== -->
+        
+        <style>
+            #card:hover {
+                color: red;
+            }
+        </style>
+        
+        <script type="text/javascript">
+            function redirectObject(id) {
+                window.open('object.xhtml?id=' + id, '_blank');
+            }
+        </script>
+        
         
     </h:body>
 </html>

@@ -64,9 +64,9 @@ public class ObjectBeans {
         return findTypeName.get(0).getName();
     }
     
-    public String getUserName() {
+    public Users getUserInfo() {
         List<Users> findUserName = entityManager.createQuery( "FROM Users WHERE id = '" + dataObject.getIdClient() + "'", Users.class ).getResultList();
-        return findUserName.get(0).getUsername();
+        return findUserName.get(0);
     }
 
     public Objects getDataObject() {
@@ -77,6 +77,9 @@ public class ObjectBeans {
         ObjectBeans.dataObject = dataObject;
     }
 
+    public String getImage() {
+        return "url_vers_image/" + dataObject.getImage();
+    }
     
     
 }

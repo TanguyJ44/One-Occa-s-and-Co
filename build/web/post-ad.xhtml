@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Post-Ad</title>
+        
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{post.onLoad}"/>
+        </f:metadata>
+    </h:head>
+    <h:body style="font-family: 'Comfortaa', cursive;">
+        
+        
+        <h1>Vendre un nouvelle objet</h1>
+        
+        <h:messages layout="table" style="color: red;" />
+        <p style="color: #{dashboard.error_color};">#{dashboard.error_message}</p>
+        
+        <h:form enctype="multipart/form-data">
+            <p style="color: green;">#{post.successUploadMessage}</p>
+            <p>Pour commencer, veuillez choisir une image pour votre annonce (.png ou .jpg) :</p>
+            <h:inputFile id="uploader" value="#{post.file}" validator="#{post.validate}">
+                <f:ajax listener="#{post.uploadImage}" render="@form"/>
+            </h:inputFile>
+            
+            <p>Choisissez maintenant à quelle catégorie appartient votre objet :</p>
+            <h:selectOneMenu value="#{post.selectedType}">
+                <f:selectItems value="#{post.types}" var="data" itemValue="#{data}" itemLabel="#{data.name}" />
+            </h:selectOneMenu>
+            
+            <p>Vous pouvez désormais indiquer quelques informations sur votre objet :</p>
+            
+            <p>Titre de l'annonce :</p>
+            <h:inputText id="title" value="#{post.title}" required="true" 
+                         requiredMessage="La saisie du titre est obligatoire !"
+                         a:placeholder="Un super smartphone ..." />
+            
+            <p>Description :</p>
+            <h:inputTextarea id="description" value="#{post.description}" required="true" 
+                         requiredMessage="La saisie de la description est obligatoire !" 
+                         cols="60" rows="10" />
+            
+            <p>Prix (€):</p>
+            <h:inputText id="price" value="#{post.price}" required="true" 
+                         requiredMessage="La saisie du prix est obligatoire !"
+                         a:placeholder="Ex: 20 ou 56.14 ou 32,85 ...">
+                <f:validateRegex pattern="^[0-9]*.?[0-9]+$" />
+            </h:inputText>
+            
+
+            <br></br>
+            <br></br>
+            
+            <p>Tout vous semble correct ?</p>
+            <p>Si oui, il ne vous reste plus qu'à valider votre annonce et on s'occupe de la mettre en ligne ...</p>
+
+            <h:commandButton value="Poster l'objet" action="#{post.postNewObject}" />
+        </h:form>
+        
+    </h:body>
+</html>
+

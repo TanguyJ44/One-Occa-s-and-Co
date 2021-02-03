@@ -18,6 +18,8 @@
             <h:messages globalOnly="true" />
         </h:form>
         
+        <p style="color: #{dashboard.error_color};">#{dashboard.error_message}</p>
+        
         <h:form>
             <h3>Mes objets :</h3>
             <h:selectOneMenu value="#{dashboard.selectedObjects}">
@@ -62,7 +64,7 @@
             <h:inputText id="zipcode" value="#{dashboard.user_zipcode}" required="true" 
                          requiredMessage="La saisie du code postal est obligatoire !" />
             
-            <p>Ancien mot de passe (*)</p>
+            <p>Mot de passe actuel (*)</p>
             <h:inputSecret id="oldpassword" value="#{dashboard.user_oldpassword}" required="true"
                          requiredMessage="La saisie du mot de passe est obligatoire !" />
 
