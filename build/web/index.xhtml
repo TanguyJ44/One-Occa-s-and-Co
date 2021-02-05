@@ -107,6 +107,15 @@
            </div>
         </ui:repeat>
         
+        <c:if test="#{home.viewMoreObject eq true}">
+            <h:form>
+                <h:commandButton value="Voir Plus" action="#{home.onViewMoreObject}" 
+                         style="margin-left: 40%;width: 20%; height: 50px;border-radius: 20px; cursor: pointer;" />
+            </h:form>
+        </c:if>
+        
+        <br></br>
+        
         <!-- ===================================== -->
         
         <style>

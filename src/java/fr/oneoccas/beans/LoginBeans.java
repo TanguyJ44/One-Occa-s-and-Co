@@ -130,11 +130,9 @@ public class LoginBeans {
                     Logger.getLogger(LoginBeans.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                // bad user password
                 setError("Email ou Mot de passe invalide !");
             }
         } else {
-            // user not found
             setError("Email ou Mot de passe invalide !");
         }
     }
@@ -156,16 +154,13 @@ public class LoginBeans {
                     
                     setError("Votre compte a bien été créé, vous pouvez désormais vous connecter !");
                 } else {
-                    // password not match
                     setError("Les deux mots de passe renseignés ne sont pas identiques !");
                 }
                 
             } else {
-                // username exist
                 setError("Le pseudo renseignée est déjà associé à un compte existant !");
             }
         } else {
-            // email exist
             setError("L'email renseignée est déjà associé à un compte existant !");
         }
     }

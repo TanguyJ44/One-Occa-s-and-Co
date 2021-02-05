@@ -49,8 +49,7 @@ public class DashboardBeans {
         GREEN
     }
 
-    public DashboardBeans()
-    {
+    public DashboardBeans() {
         context = FacesContext.getCurrentInstance();
         externalContext = context.getExternalContext();
         
@@ -59,8 +58,7 @@ public class DashboardBeans {
         entityTransaction = entityManager.getTransaction();
     }
     
-    public void onLoad()
-    {  
+    public void onLoad() {  
         if (!externalContext.getSessionMap().containsKey("user-id")) {
             try {    
                 externalContext.redirect("login.xhtml");
@@ -78,21 +76,20 @@ public class DashboardBeans {
         }
     }
     
-    public void onDisconnect()
-    {
+    public void onDisconnect() {
         context = FacesContext.getCurrentInstance();
         externalContext = context.getExternalContext();
                
         try {    
             externalContext.getSessionMap().remove("user-id");
-            externalContext.redirect("login.xhtml");
+            externalContext.getSessionMap().remove("page-index");
+            externalContext.redirect("index.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(LoginBeans.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void onDeleteObject()
-    {
+    public void onDeleteObject() {
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(selectedObject);
         int selectedID = -1;
@@ -115,8 +112,7 @@ public class DashboardBeans {
         error_message = "L'objet a bien été supprimé !";
     }
     
-    public void onUpdateUserInfo()
-    {
+    public void onUpdateUserInfo() {
         if (user_newpassword.isEmpty() || !user_newpassword.isEmpty() && 
                 user_newpassword.equalsIgnoreCase(user_secondnewpassword)) {
             if (getUsers().get(0).getPassword().equalsIgnoreCase(""+user_oldpassword.hashCode())) {
@@ -145,8 +141,7 @@ public class DashboardBeans {
         
     }
     
-    public List<Objects> getObjects()
-    {
+    public List<Objects> getObjects() {
         return entityManager.createQuery("from Objects WHERE idClient = " +
                 getUsers().get(0).getId(), Objects.class).getResultList();
     }
@@ -172,13 +167,11 @@ public class DashboardBeans {
         this.error_color = error_color;
     }
 
-    public String getSelectedObjects()
-    {
+    public String getSelectedObjects() {
         return selectedObject;
     }
 
-    public void setSelectedObjects(String selectedObject)
-    {
+    public void setSelectedObjects(String selectedObject) {
         this.selectedObject = selectedObject;
     }
 

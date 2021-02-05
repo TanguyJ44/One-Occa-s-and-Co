@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,7 +14,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
@@ -68,8 +66,7 @@ public class PostAdBeans {
         trans = entityManager.getTransaction();
     }
     
-    public void onLoad()
-    {  
+    public void onLoad() {  
         if (!externalContext.getSessionMap().containsKey("user-id")) {
             try {    
                 externalContext.redirect("login.xhtml");

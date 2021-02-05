@@ -3,15 +3,12 @@ package fr.oneoccas.beans;
 import fr.oneoccas.mapping.Objects;
 import fr.oneoccas.mapping.Types;
 import fr.oneoccas.mapping.Users;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -20,7 +17,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 @ManagedBean(name="home")
-@RequestScoped
+@SessionScoped
 public class HomeBeans {
     
     FacesContext context = null;
@@ -34,6 +31,7 @@ public class HomeBeans {
     
     private List<Objects> searchObject;
     private boolean submit = false;
+    private boolean viewMoreObject = false;
     
     private String selectedObject;
     private String search;
@@ -55,8 +53,7 @@ public class HomeBeans {
         }
     }
     
-    public void onLoad()
-    {
+    public void onLoad() {
         if(!submit) {
             for (int i = 1; i < 6; i++) {
                 searchObject.add(getObjects().get(getObjects().size()-i));
@@ -64,8 +61,7 @@ public class HomeBeans {
         }
     }
     
-    public void onSearch()
-    {
+    public void onSearch() {
         submit = true;
         
         Pattern pattern = Pattern.compile("\\d+");
@@ -74,6 +70,12 @@ public class HomeBeans {
     
         while(matcher.find()) {
             selectedID = Integer.parseInt(matcher.group());
+        }
+        
+        int pageIndex = 1;
+        
+        if (externalContext.getSessionMap().containsKey("page-index")) {
+            pageIndex = (int) externalContext.getSessionMap().get("page-index");
         }
         
         String request = "";
@@ -85,11 +87,10 @@ public class HomeBeans {
             request += " AND prix LIKE '%" + price + "%'";
         }
         
-        searchObject = entityManager.createQuery("from Objects WHERE type = " + selectedID + request, 
-                Objects.class).getResultList();
+        searchObject = entityManager.createQuery("from Objects WHERE type = " + selectedID + request + " ORDER BY id DESC", 
+                Objects.class).setMaxResults(10 * pageIndex).getResultList();
                 
         Users user = null;
-        
         if (!zipcode.isEmpty()) {
             for (Objects object : searchObject) {
                 user = entityManager.createQuery("from Users WHERE id = " + object.getIdClient(), 
@@ -98,6 +99,22 @@ public class HomeBeans {
                     searchObject.remove(object);
             }
         }
+        
+        if (searchObject.size() == 10) {
+            viewMoreObject = true;
+        }
+
+    }
+    
+    public void onViewMoreObject() {
+        if (!externalContext.getSessionMap().containsKey("page-index")) {
+            externalContext.getSessionMap().put("page-index", 2);
+        } else {
+            int currentPageIndex = (int) externalContext.getSessionMap().get("page-index");
+            externalContext.getSessionMap().put("page-index", currentPageIndex + 1);
+        }
+        
+        onSearch();
     }
     
     public List<Users> getUsers() {
@@ -122,6 +139,14 @@ public class HomeBeans {
 
     public List<Objects> getSearchObject() {
         return searchObject;
+    }
+
+    public boolean isViewMoreObject() {
+        return viewMoreObject;
+    }
+
+    public void setViewMoreObject(boolean viewMoreObject) {
+        this.viewMoreObject = viewMoreObject;
     }
 
     public void setSearchObject(List<Objects> searchObject) {

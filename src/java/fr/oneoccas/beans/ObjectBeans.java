@@ -80,6 +80,5 @@ public class ObjectBeans {
     public String getImage() {
         return "url_vers_image/" + dataObject.getImage();
     }
-    
-    
+
 }

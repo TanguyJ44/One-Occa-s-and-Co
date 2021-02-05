@@ -20,8 +20,7 @@ public class ValidateBeans {
         externalContext = context.getExternalContext();
     }
     
-    public void onLoad()
-    {  
+    public void onLoad() {  
         if (!externalContext.getSessionMap().containsKey("user-id")) {
             try {    
                 externalContext.redirect("login.xhtml");
