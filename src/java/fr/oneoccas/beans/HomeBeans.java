@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -17,7 +18,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 @ManagedBean(name="home")
-@SessionScoped
+@RequestScoped
 public class HomeBeans {
     
     FacesContext context = null;
@@ -63,6 +64,8 @@ public class HomeBeans {
     
     public void onSearch() {
         submit = true;
+        
+        searchObject.clear();
         
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(selectedObject);

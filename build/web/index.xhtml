@@ -9,15 +9,33 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>OneOccas</title>
+        <title>Accueil - OneOccas</title>
         
         <f:metadata>
             <f:event type="preRenderView" listener="#{home.onLoad}"/>
         </f:metadata>
     </h:head>
-    <h:body style="font-family: 'Comfortaa', cursive;">
+    <h:body>
+        
+        <header>
+            <img id="logo" src="http://upload.fr-fr.cc/Capture7.JPG" ></img>
+            <a href="post-ad.xhtml">
+                <div class="addt">
+                    <img class="add" src="http://upload.fr-fr.cc/add.png"></img>
+                </div>
+            </a>
+            <a href="dashboard.xhtml">
+                <h3 class="profilt">
+                    <img class="profil" src="http://upload.fr-fr.cc/Capture10.JPG"></img>
+                </h3>
+            </a>
+        </header>
+        
+        <br></br>
         
         <h1 style="text-align: center;">Bienvenue sur le site OneOccas</h1>
+        
+        <br></br>
         
         <h:messages layout="table" style="text-align: center;color: red;" />
         
@@ -90,7 +108,7 @@
                  margin-bottom: 20px;border: solid;border-radius: 5px;border-width: 2px;border-color: gray;cursor: pointer;">
 
                <div style="width: 20%;height: 150px;display: inline-block;">
-                   <img src="#{obj.image}" width="150px" height="150px" style="margin-left: 20px;" />
+                   <img src="http://upload.fr-fr.cc/#{obj.image}" width="150px" height="150px" style="margin-left: 20px;" />
                </div>
 
                <div style="width: 58%;height: 150px;display: inline-block;">
@@ -119,6 +137,67 @@
         <!-- ===================================== -->
         
         <style>
+            body {
+                margin: 0;
+                font-family: 'Comfortaa', cursive;
+            }
+            
+            header {
+                overflow: hidden;
+                background-color:rgb(236, 30, 30);
+                padding: 10px;
+            }
+            
+            #logo {
+                width: 100px;
+                margin-left: 3% ;
+                margin-top: 1%;
+            }
+
+            .haut {
+                background-color:rgb(236, 30, 30) ;
+                height:170px ;
+                width:100% ;
+            }
+
+            textarea {
+                border: 110%;
+                border-width: 3px;
+                width: 20%;
+                border-color:rgb(255, 255, 255) ;
+                margin-top: 4% ;
+                margin-left: 9% ;
+                border-radius:13px ;
+            }
+
+            .h{
+                z-index: 15 ;
+                margin-top: -23%;
+                margin-left: 40%;
+            }
+
+            .profil{
+                margin-left: 19%;
+                margin-top:0% ;
+                z-index: 40;
+            }
+            .add {
+                width: 40px;
+            }
+
+            .profilt{
+                margin-left: 90%;
+                margin-top:-3% ;
+                color: rgb(236, 30, 30);
+                cursor: pointer;
+            }
+            .addt{
+                margin-left: 50%;
+                margin-top:-3% ;
+                color: rgb(236, 30, 30);
+                cursor: pointer;
+            }
+
             #card:hover {
                 color: red;
             }

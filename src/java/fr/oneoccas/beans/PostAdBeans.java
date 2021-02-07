@@ -121,7 +121,7 @@ public class PostAdBeans {
         }
             
         try (InputStream input = file.getInputStream()) {
-            Files.copy(input, new File("C:\\Users\\Tanguy\\Documents\\upload\\", imageName).toPath());
+            Files.copy(input, new File("var/www/upload/", imageName).toPath());
         }
         catch (IOException e) {
             fileIsUpload = false;

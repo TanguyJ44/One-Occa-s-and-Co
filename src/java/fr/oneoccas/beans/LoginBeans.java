@@ -125,7 +125,7 @@ public class LoginBeans {
             if (user.get(0).getPassword().equalsIgnoreCase(""+getPassword().hashCode())) {
                 try {    
                     externalContext.getSessionMap().put("user-id", user.get(0).getId());
-                    externalContext.redirect("dashboard.xhtml");
+                    externalContext.redirect("index.xhtml");
                 } catch (IOException ex) {
                     Logger.getLogger(LoginBeans.class.getName()).log(Level.SEVERE, null, ex);
                 }

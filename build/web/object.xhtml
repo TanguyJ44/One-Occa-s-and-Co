@@ -4,21 +4,187 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Object</title>
+        <title>#{object.dataObject.titre} - OneOccas</title>
         <f:metadata>
             <f:event type="preRenderView" listener="#{object.onLoad}"/>
         </f:metadata>
     </h:head>
     <h:body style="font-family: 'Comfortaa', cursive;">
-        <h:graphicImage width="200" height="150"
-                        value="#{object.dataObject.image}" />
-        <h2>#{object.dataObject.titre}</h2>
-        <h3>Catégorie : #{object.typeName}</h3>
-        <p>#{object.dataObject.description}</p>
-        <h2>Prix : #{object.dataObject.prix}€</h2>
-        <p>Vendu par : #{object.userInfo.username}</p>
-        <p>En vente dans le : #{object.userInfo.zipcode}</p>
-        <p>Mis en ligne le : #{object.dataObject.date}</p>
+        
+        <header>
+            <img id="logo" src="http://upload.fr-fr.cc/Capture7.JPG" ></img>
+            <a href="dashboard.xhtml">
+                <h3 class="profilt">
+                    <img class="profil" src="http://upload.fr-fr.cc/Capture10.JPG"></img>
+                </h3>
+            </a>
+        </header>
+        
+        <div class="gauche">
+            <div class="imgObj">
+                <h:graphicImage width="450" height="395"
+                        value="http://upload.fr-fr.cc/#{object.dataObject.image}" />
+            </div>
+            <div class="description">
+                <p id="description">#{object.dataObject.description}</p>
+            </div>
+        </div>
+
+        <div class="infoSeller">
+            <div>
+                <p id="titreS">#{object.dataObject.titre}</p>
+                <p id="name">#{object.typeName}</p>
+                <p id="contact">Vendu par : #{object.userInfo.username}</p>
+                <p id="date">Localisation: #{object.userInfo.zipcode}</p>
+                <p id="date">Mis en ligne le : #{object.dataObject.date}</p>
+            </div>
+        </div>    
+        <div class="price">
+            <p id="price">#{object.dataObject.prix} €</p>
+        </div>
+        
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Comfortaa', cursive;
+            }
+            
+            header {
+                overflow: hidden;
+                background-color:rgb(236, 30, 30);
+                padding: 10px;
+            }
+            
+            #logo {
+                width: 100px;
+                margin-left: 3% ;
+                margin-top: 1%;
+            }
+
+            .haut {
+                background-color:rgb(236, 30, 30) ;
+                height:170px ;
+                width:100% ;
+            }
+
+            textarea {
+                border: 110%;
+                border-width: 3px;
+                width: 20%;
+                border-color:rgb(255, 255, 255) ;
+                margin-top: 4% ;
+                margin-left: 9% ;
+                border-radius:13px ;
+            }
+
+            .h{
+                z-index: 15 ;
+                margin-top: -23%;
+                margin-left: 40%;
+            }
+
+            .profil{
+                margin-left: 19%;
+                margin-top:0% ;
+                z-index: 40;
+            }
+
+            .profilt{
+                margin-left: 90%;
+                margin-top:-3% ;
+                color: rgb(236, 30, 30);
+                cursor: pointer;
+            }
+            
+            .gauche {
+                float: left;
+                width: 50%;
+            }
+
+            .imgObj {
+                border-width: 5px;
+                border-left-color:white;
+                border-top-color:rgb(236, 30, 30);
+                border-style: solid;
+            }
+
+            .infoSeller {
+                margin-left: 50%;
+                margin-right: 1%;
+                border-width: 5px;
+                width: 50%;
+                border-left-color:white;
+                border-top-color: rgb(236, 30, 30);
+                border-right-color: white;
+                border-style: solid;
+            }
+
+            .description {
+                border-width: 5px;
+                width: 100%;
+                border-top-color: white;
+                border-left-color:white;
+                border-bottom-color: white;
+                border-style: solid;
+            }
+
+            #description {
+                margin-left: 2%;
+                margin-top: 2%;
+                font-size: 20px;
+            }
+
+            .price {
+                margin-left: 50%;
+                margin-right: 1%;
+                border-width: 5px;
+                width: 50%;
+                border-color: white;
+                border-style: solid;
+            }
+
+            #titreS {
+                margin-left: 2%;
+                margin-top: 2%;
+                font-size: 250%;
+            }
+
+            #name {
+                margin-left: 2%;
+                font-size: 30px;
+            }
+
+            #contact {
+                margin-left: 2%;
+                font-size: 30px;
+            }
+
+            #date {
+                margin-left: 2%;
+                font-size: 30px;
+            }
+
+            #price {
+                margin-left: 2%;
+                margin-top: 2%;
+                font-size: 245%;
+                color: red;
+            }
+
+            #imgObjet {
+                max-width: 50%;
+                height: auto;
+                margin-left: 15%;
+            }
+            
+            .title{
+                color: rgb(255, 255, 255);
+                font-size: 250%;
+                margin-left:48%;
+                margin-top: -2%;
+            }
+        </style>
+        
     </h:body>
 </html>
 

@@ -4,76 +4,215 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>Login</title>
+        <title>Connexion / Inscription - OneOccas</title>
         <f:metadata>
             <f:event type="preRenderView" listener="#{login.onLoad()}"/>
         </f:metadata>
     </h:head>
-    <h:body style="font-family: 'Comfortaa', cursive;">
+    <h:body>
         
-        <h1>Page de Connexion / Inscription</h1>
+        <header>
+            <img id="logo" src="http://upload.fr-fr.cc/Capture7.JPG" ></img>
+            <a href="dashboard.xhtml">
+                <h3 class="profilt">
+                    <img class="profil" src="http://upload.fr-fr.cc/Capture10.JPG"></img>
+                </h3>
+            </a>
+        </header>
+        
+        <br></br>
+        <br></br>
+        <h1 style="text-align: center">Page de Connexion / Inscription</h1>
+        <br></br>
+        <br></br>
         
         <h:messages layout="table" style="color: red;" />
         <p style="color: red;">#{login.error}</p>
         
-        <div style="display: table-cell; width: 250px; height: 500px; border: medium solid white">
-            <h:form>
-                <p>Email</p>
-                <h:inputText id="email" value="#{login.email}" required="true" 
-                             requiredMessage="La saisie de l'email est obligatoire !"
-                             validatorMessage="Merci d'entrer un email valide !">
-                             <f:validateRegex pattern="^[\w.+-]+@[\w.+-]+\.[a-z]{2,}$" />
-                </h:inputText>
+        <div class="content">
+            <div style="display: table-cell; width: 350px; height: 500px; border: medium solid white;">
+                <h:form>
 
+                    <h1 class = "titre">Connexion</h1>
 
-                <p>Mot de passe</p>
-                <h:inputSecret id="password" value="#{login.password}" required="true"
-                             requiredMessage="La saisie du mot de passe est obligatoire !" />
+                    <h3 class = "i1">Email</h3>
+                    <h:inputText id="email" value="#{login.email}" required="true" 
+                                 requiredMessage="La saisie de l'email est obligatoire !"
+                                 validatorMessage="Merci d'entrer un email valide !">
+                                 <f:validateRegex pattern="^[\w.+-]+@[\w.+-]+\.[a-z]{2,}$" />
+                    </h:inputText>
+
+                    <h3 class = "mdp1">Mot de passe</h3>
+                    <h:inputSecret id="password" value="#{login.password}" required="true"
+                                 requiredMessage="La saisie du mot de passe est obligatoire !" />
+
+                    <br></br>
+                    <br></br>
+                    <h:commandButton class="b1" value="Connexion" action="#{login.onLogin()}" />
+                    <h:messages globalOnly="true" />
+
+                </h:form>
+            </div>
+
+            <div style="display: table-cell; width: 350px; height: 500px; border: medium solid white">
+                <h:form>
+
+                    <h1 class="inscription">Inscription</h1>
+
+                    <h3>Nom</h3>
+                    <h:inputText id="lastname" value="#{login.lastname}" required="true" 
+                                 requiredMessage="La saisie du nom est obligatoire !" />
+
+                    <h3>Prénom</h3>
+                    <h:inputText id="firstname" value="#{login.firstname}" required="true" 
+                                 requiredMessage="La saisie du prénom est obligatoire !" />
+
+                    <h3>Pseudo</h3>
+                    <h:inputText id="username" value="#{login.username}" required="true" 
+                                 requiredMessage="La saisie du pseudo est obligatoire !" />
+
+                    <h3>Code Postal</h3>
+                    <h:inputText id="zipcode" value="#{login.zipcode}" required="true" 
+                                 requiredMessage="La saisie du code postal est obligatoire !">
+                        <f:validateRegex pattern="^[0-9]{5}$" />
+                    </h:inputText>
+
+                    <h3>Email</h3>
+                    <h:inputText id="email" value="#{login.email}" required="true" 
+                                 requiredMessage="La saisie de l'email est obligatoire !"
+                                 validatorMessage="Merci d'entrer un email valide !">
+                                 <f:validateRegex pattern="^[\w.+-]+@[\w.+-]+\.[a-z]{2,}$" />
+                    </h:inputText>
+
+                    <h3>Mot de passe</h3>
+                    <h:inputSecret id="password" value="#{login.password}" required="true"
+                                 requiredMessage="La saisie du mot de passe est obligatoire !" />
+
+                    <h3>Répéter mot de passe</h3>
+                    <h:inputSecret id="secondpassword" value="#{login.secondpassword}" required="true"
+                                 requiredMessage="La saisie du mot de passe est obligatoire !" />
+
+                    <br></br>
+                    <br></br>
+
+                    <h:commandButton class="b2" value="Inscription" action="#{login.onRegister()}" />
+                    <h:messages globalOnly="true" />
+                </h:form>
 
                 <br></br>
                 <br></br>
-                <h:commandButton value="Connexion" action="#{login.onLogin()}" />
-                <h:messages globalOnly="true" />
-            </h:form>
+
+            </div>
+            
         </div>
         
-        <div style="display: table-cell; width: 250px; height: 500px; border: medium solid white">
-            <h:form>
-                <p>Nom</p>
-                <h:inputText id="lastname" value="#{login.lastname}" required="true" 
-                             requiredMessage="La saisie du nom est obligatoire !" />
-                <p>Prénom</p>
-                <h:inputText id="firstname" value="#{login.firstname}" required="true" 
-                             requiredMessage="La saisie du prénom est obligatoire !" />
-                <p>Pseudo</p>
-                <h:inputText id="username" value="#{login.username}" required="true" 
-                             requiredMessage="La saisie du pseudo est obligatoire !" />
-                <p>Code Postal</p>
-                <h:inputText id="zipcode" value="#{login.zipcode}" required="true" 
-                             requiredMessage="La saisie du code postal est obligatoire !" />
-                <p>Email</p>
-                <h:inputText id="email" value="#{login.email}" required="true" 
-                             requiredMessage="La saisie de l'email est obligatoire !"
-                             validatorMessage="Merci d'entrer un email valide !">
-                             <f:validateRegex pattern="^[\w.+-]+@[\w.+-]+\.[a-z]{2,}$" />
-                </h:inputText>
-
-
-                <p>Mot de passe</p>
-                <h:inputSecret id="password" value="#{login.password}" required="true"
-                             requiredMessage="La saisie du mot de passe est obligatoire !" />
-                <p>Répéter mot de passe</p>
-                <h:inputSecret id="secondpassword" value="#{login.secondpassword}" required="true"
-                             requiredMessage="La saisie du mot de passe est obligatoire !" />
-
-                <br></br>
-                <br></br>
-                <h:commandButton value="Inscription" action="#{login.onRegister()}" />
-                <h:messages globalOnly="true" />
-            </h:form>
-        </div>
         
         
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Comfortaa', cursive;
+            }
+            header {
+                overflow: hidden;
+                background-color:rgb(236, 30, 30);
+                padding: 10px;
+            }
+            .content {
+                margin-left: 32%;
+            }
+            
+            #logo {
+                width: 100px;
+                margin-left: 3% ;
+                margin-top: 1%;
+            }
+
+            .haut {
+                background-color:rgb(236, 30, 30) ;
+                height:170px ;
+                width:100% ;
+            }
+
+            textarea {
+                border: 110%;
+                border-width: 3px;
+                width: 20%;
+                border-color:rgb(255, 255, 255) ;
+                margin-top: 4% ;
+                margin-left: 9% ;
+                border-radius:13px ;
+            }
+
+            .h{
+                z-index: 15 ;
+                margin-top: -23%;
+                margin-left: 40%;
+            }
+
+            .profil{
+                margin-left: 19%;
+                margin-top:0% ;
+                z-index: 40;
+            }
+
+            .profilt{
+                margin-left: 90%;
+                margin-top:-3% ;
+                color: rgb(236, 30, 30);
+                cursor: pointer;
+            }
+            .titre{
+                color:rgb(235, 8, 8);
+            }
+            .inscription{
+                color:rgb(235, 8, 8);
+            }
+            .separation{
+
+                background-color:rgb(235, 8, 8) ;
+                height:710px ;
+                width:5PX ;
+                margin-left: 50% ;
+                margin-top: -37% ;
+            }
+            textarea{
+
+                border: 100%;
+                border-width: 4px;
+                width: 20%;
+                border-color:rgb(235, 8, 8) ;
+                margin-top: 0% ;
+                margin-left: 13% ;
+                border-radius:13px ;
+            }
+            .zone{
+                border: 100%;
+                border-width: 4px;
+                width: 20%;
+                border-color:rgb(235, 8, 8) ;
+                margin-top: 3% ;
+                margin-left: 64% ;
+                border-radius:13px ;
+            }
+            .b1{
+                margin-left: 10%;
+                border: 100%;
+                border-width: 4px;
+                border-color:rgb(235, 8, 8) ;
+                border-radius:13px ;
+                cursor: pointer;
+            }
+
+            .b2{
+                margin-left: 10%;
+                border: 100%;
+                border-width: 4px;
+                border-color:rgb(235, 8, 8) ;
+                border-radius:13px ;
+                cursor: pointer;
+            }
+        </style>
         
     </h:body>
 </html>
