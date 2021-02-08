@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -55,7 +54,7 @@ public class HomeBeans {
     }
     
     public void onLoad() {
-        if(!submit) {
+        if(!submit && getObjects().size() > 0) {
             for (int i = 1; i < 6; i++) {
                 searchObject.add(getObjects().get(getObjects().size()-i));
             }

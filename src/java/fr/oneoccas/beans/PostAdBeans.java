@@ -122,12 +122,17 @@ public class PostAdBeans {
             
         try (InputStream input = file.getInputStream()) {
             Files.copy(input, new File("var/www/upload/", imageName).toPath());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             fileIsUpload = false;
             error_color = Color.RED;
             error_message = "Un problème est survenue lors de l'envoie de votre image !";
         } finally {
+            File f = new File("var/www/upload/" + imageName); 
+         
+            f.setExecutable(true, false);
+            f.setReadable(true, false);
+            f.setWritable(true, false); 
+            
             fileIsUpload = true;
             successUploadMessage = "Votre image " + fileName + " à bien été enregistré !";
         }

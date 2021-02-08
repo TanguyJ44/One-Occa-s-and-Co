@@ -7,10 +7,10 @@
     <class>fr.oneoccas.mapping.Types</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://178.32.111.39:3306/one-occas?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="supitech"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ip:3306/bdd?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="user"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="TEY(Ren6%-7s4a3"/>
+      <property name="javax.persistence.jdbc.password" value="mdp"/>
     </properties>
   </persistence-unit>
 </persistence>

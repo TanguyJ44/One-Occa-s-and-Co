@@ -38,18 +38,18 @@
             <h:selectOneMenu value="#{dashboard.selectedObjects}">
                 <f:selectItems value="#{dashboard.objects}" var="data" itemLabel="#{data.titre} - #{data.prix}€" />
             </h:selectOneMenu>
-            
+
             <br></br>
             <br></br>
-            
+
             <input style="margin-left: 4%;" type="button" id="deleteBtn" value="Supprimer l'objet"
                               onclick="confirmDelete();"/>
-            
+
             <div id="actionDelete" style="display: none;">
                 <h:commandButton value="Confirmer la suppression" action="#{dashboard.onDeleteObject()}" />
                 <input type="button" value="Annuler" onclick="cancelDelete();" />
             </div>
-            
+
             <div class="séparation" style="margin-left: -13%;"></div>
         </h:form>
         
